@@ -12,6 +12,7 @@ document.getElementById("new-product-btn").addEventListener("click", async (e)=>
     for(let input of form){
         data[input.name] = input.value
     }
+    paintCard(data,false)
     console.log("data recogida del formulario", data)
      const postResponse = await postNewProduct(data);
 
