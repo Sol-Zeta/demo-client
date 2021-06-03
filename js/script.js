@@ -5,7 +5,7 @@ import { paintCard, clearCards } from './utils/paintData.js'
 // luego iteramos el array recibido y pintamos cada elemento con la función paintCard()
 const init = async() => {
     //...
-    await clearCards()
+    clearCards()
     const allProducts = await getAllProducts()
     allProducts.forEach((product) => paintCard(product, false))
 }

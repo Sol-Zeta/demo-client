@@ -12,11 +12,11 @@ document.getElementById("new-product-btn").addEventListener("click", async(e) =>
     for (let input of form) {
         data[input.name] = input.value
     }
-    console.log("data recogida del formulario", data)
+    // console.log("data recogida del formulario", data)
     const postResponse = await postNewProduct(data);
 
-    clearCards()
-    postResponse.data.forEach((product) => paintCard(product, false))
+    init(postResponse.data)
+    document.getElementById("form").reset();
 
     // a continuación hay que invocar nuevamente la función que pide los productos y la que los pinta
 
@@ -27,12 +27,15 @@ document.getElementById("new-product-btn").addEventListener("click", async(e) =>
 
 // Con init invocamos la función que borra las tarjetas y la que pide todos mis productos a la API 
 // luego iteramos el array recibido y pintamos cada elemento con la función paintCard()
-const init = async() => {
-    // ...
+const init = async(arr) => {
     clearCards()
-    const allProducts = await getMyProducts()
-    console.log("lo que llega del fetch", allProducts)
-    allProducts.data.forEach((product) => paintCard(product, false))
+    if (arr) {
+        arr.forEach((product) => paintCard(product, false))
+    } else {
+        const allProducts = await getMyProducts()
+            // console.log("lo que llega del fetch", allProducts)
+        allProducts.data.forEach((product) => paintCard(product, false))
+    }
 }
 
 // Inicializar script invocando init
